@@ -2,8 +2,10 @@ package ru.netology.nmedia
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.nmedia.Post
+    import ru.netology.nmedia.Post
 import ru.netology.nmedia.databinding.PostListItemBinding
 
 typealias OnListener = (post: Post) -> Unit
@@ -11,13 +13,7 @@ typealias OnListener = (post: Post) -> Unit
 class PostsAdapter(
     private val onLikeClicked: OnListener,
     private val onShareClicked: OnListener
-    ) : RecyclerView.Adapter<ViewHolder>() {
-
-    var posts: List<Post> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    ) : ListAdapter<Post, PostsAdapter.ViewHolder>(PostDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = PostListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,18 +21,15 @@ class PostsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val post = posts[position]
+        val post = getItem(position)
         holder.bind(post)
     }
 
-    override fun getItemCount(): Int = posts.size
-}
-
-class ViewHolder(
-    private val binding: PostListItemBinding,
-    private val onLikeClicked: OnListener,
-    private val onShareClicked: OnListener
-) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: PostListItemBinding,
+        private val onLikeClicked: OnListener,
+        private val onShareClicked: OnListener
+    ) : RecyclerView.ViewHolder(binding.root) {
 
     private lateinit var post: Post
 
@@ -76,4 +69,14 @@ class ViewHolder(
             } else return (count / 1000).toString() + " K"
         } else return count.toString()
     }
-}
+
+    }
+
+    private object PostDiffCallback : DiffUtil.ItemCallback<Post>() {
+        override fun areItemsTheSame(oldItem: Post, newItem: Post) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Post, newItem: Post) =
+            oldItem == newItem
+    }
+    }
