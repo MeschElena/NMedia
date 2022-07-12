@@ -1,147 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/common_spacing"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="@dimen/posts_avatar_size"
-        android:layout_height="@dimen/posts_avatar_size"
-        android:contentDescription="@string/avatar_description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
-
-    <TextView
-        android:id="@+id/author"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginEnd="8dp"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="Название автора поста"
-        app:layout_constraintBottom_toTopOf="@id/published"
-        app:layout_constraintEnd_toStartOf="@id/options"
-        app:layout_constraintStart_toEndOf="@id/avatar"
-        app:layout_constraintTop_toTopOf="@id/avatar" />
-
-    <TextView
-        android:id="@+id/published"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="Дата поста"
-        app:layout_constraintBottom_toBottomOf="@id/avatar"
-        app:layout_constraintEnd_toEndOf="@id/author"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/avatar"
-        app:layout_constraintTop_toBottomOf="@id/author" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_options_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/headerBarrier"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="avatar,options,published" />
-
-    <TextView
-        android:id="@+id/content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:ellipsize="end"
-        app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBarrier"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="@tools:sample/lorem/random" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/bottomBarrier"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="top"
-        android:layout_marginBottom="32dp"
-        app:constraint_referenced_ids="likeImage,likeText,shareImage,shareText,visibilityImage,visibilityText" />
-
-    <ImageButton
-        android:id="@+id/likeImage"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-        app:srcCompat="@drawable/ic_favorite_48" />
-
-    <TextView
-        android:id="@+id/likeText"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-
-        android:text="15"
-        app:layout_constraintBottom_toBottomOf="@id/likeImage"
-        app:layout_constraintTop_toTopOf="@id/likeImage"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-        app:layout_constraintStart_toEndOf="@id/likeImage"/>
-
-    <ImageView
-        android:id="@+id/shareImage"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/likeText"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-
-        app:srcCompat="@drawable/ic_share_48" />
-
-    <TextView
-        android:id="@+id/shareText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/shareImage"
-        app:layout_constraintTop_toTopOf="@id/shareImage"
-        android:text="15"
-        app:layout_constraintStart_toEndOf="@id/shareImage"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier" />
-
-    <ImageView
-        android:id="@+id/visibilityImage"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/visibilityText"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-
-        app:srcCompat="@drawable/ic_visibility_48" />
-
-    <TextView
-        android:id="@+id/visibilityText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/visibilityImage"
-        app:layout_constraintTop_toTopOf="@id/visibilityImage"
-        android:text="15,5K"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/post_list_item"
+        />
+</FrameLayout>
