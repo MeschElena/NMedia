@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">НМедиа</string>
+    <string name="nmedia">НМедиа!</string>
+    <string name="avatar_description">Аватар автора</string>
+    <string name="remove">Удалить</string>
+    <string name="edit">Редактировать</string>
+    <string name="description_post_like">Нравится</string>
+    <string name="post_text">Текст поста</string>
+    <string name="description_close_edit">Закрыть</string>
+</resources>
