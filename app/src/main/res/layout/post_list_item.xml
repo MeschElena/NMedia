@@ -46,14 +46,16 @@
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toBottomOf="@id/author" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_options_24"
+        app:icon="@drawable/ic_options_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:iconTint="@color/black"
+        style="@style/Widget.App.Button.OutlinedButton.IconOnly"/>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/headerBarrier"
@@ -69,61 +71,44 @@
         android:autoLink="web"
         android:ellipsize="end"
         app:layout_constraintBottom_toTopOf="@id/bottomBarrier"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         app:layout_constraintVertical_bias="0.0"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="Привет! Нетология" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/bottomBarrier"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:barrierDirection="top"
+        app:barrierDirection="bottom"
         android:layout_marginBottom="32dp"
-        app:constraint_referenced_ids="likeImage,likeText,shareImage,shareText,visibilityImage,visibilityText" />
+        app:constraint_referenced_ids="content" />
 
-    <ImageButton
-        android:id="@+id/likeImage"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/like"
+        android:checkable="true"
+        android:textColor="@color/black"
+        android:contentDescription="Like"
+        tools:text="10999"
+        style="@style/Widget.AppTheme.LikeCheckbox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-        app:srcCompat="@drawable/ic_favorite_48" />
+        app:icon="@drawable/ic_like_24dp"
+        app:backgroundTint="@color/white"/>
 
-    <TextView
-        android:id="@+id/likeText"
-        android:layout_width="64dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/share"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="15"
-        app:layout_constraintBottom_toBottomOf="@id/likeImage"
-        app:layout_constraintTop_toTopOf="@id/likeImage"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-        app:layout_constraintStart_toEndOf="@id/likeImage"/>
-
-    <ImageView
-        android:id="@+id/shareImage"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_marginTop="8dp"
+        android:checkable="true"
+        tools:text="10999"
+        style="@style/Widget.AppTheme.ShareButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/likeText"
+        app:layout_constraintStart_toEndOf="@id/like"
         app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-
-        app:srcCompat="@drawable/ic_share_48" />
-
-    <TextView
-        android:id="@+id/shareText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/shareImage"
-        app:layout_constraintTop_toTopOf="@id/shareImage"
-        android:text="15"
-        app:layout_constraintStart_toEndOf="@id/shareImage"
-        app:layout_constraintTop_toBottomOf="@id/bottomBarrier" />
+        app:icon="@drawable/ic_share_24dp" />
 
     <ImageView
         android:id="@+id/visibilityImage"

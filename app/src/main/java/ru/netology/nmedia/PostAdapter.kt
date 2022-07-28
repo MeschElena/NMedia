@@ -50,10 +50,10 @@ internal class PostsAdapter(
     }
 
     init {
-        binding.likeImage.setOnClickListener{
+        binding.like.setOnClickListener{
             listener.onLikeClicked(post)
         }
-        binding.shareImage.setOnClickListener {
+        binding.share.setOnClickListener {
             listener.onShareClicked(post)
         }
     }
@@ -63,12 +63,13 @@ internal class PostsAdapter(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likeText.text = countToString(post.countLike)
-            shareText.text = countToString(post.countShare)
+            like.text = countToString(post.countLike)
+            like.isChecked = post.likedByMe
+            share.text = countToString(post.countShare)
             visibilityText.text = countToString(post.countVisibility)
-            likeImage.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked_48 else R.drawable.ic_favorite_48
-            )
+//            like.setButtonDrawable(
+//                if (post.likedByMe) R.drawable.ic_liked_48 else R.drawable.ic_favorite_48
+//            )
             menu.setOnClickListener { popupMenu.show() }
         }
     }
