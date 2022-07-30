@@ -8,4 +8,5 @@
     <string name="description_post_like">Нравится</string>
     <string name="post_text">Текст поста</string>
     <string name="description_close_edit">Закрыть</string>
+    <string name="add_post">Добавить пост</string>
 </resources>

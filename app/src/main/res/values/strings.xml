@@ -7,4 +7,5 @@
     <string name="description_post_like">Like</string>
     <string name="post_text">Post Text</string>
     <string name="description_close_edit">Close</string>
+    <string name="add_post">Add post</string>
 </resources>
