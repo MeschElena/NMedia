@@ -20,6 +20,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 countLike = 99L + 10 * index,
                 countShare = 14L + 10 * index,
                 countVisibility = 1200,
+                video = "https://www.youtube.com/watch?v=WhWc3b3KhnY",
                 likedByMe = false
             )
         }

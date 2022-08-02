@@ -2,6 +2,7 @@ package ru.netology.nmedia
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -56,6 +57,12 @@ internal class PostsAdapter(
         binding.share.setOnClickListener {
             listener.onShareClicked(post)
         }
+        binding.play.setOnClickListener {
+            listener.onPlayVideo(post)
+        }
+        binding.video.setOnClickListener {
+            listener.onPlayVideo(post)
+        }
     }
     fun bind(post: Post) {
         this.post = post
@@ -67,9 +74,8 @@ internal class PostsAdapter(
             like.isChecked = post.likedByMe
             share.text = countToString(post.countShare)
             visibilityText.text = countToString(post.countVisibility)
-//            like.setButtonDrawable(
-//                if (post.likedByMe) R.drawable.ic_liked_48 else R.drawable.ic_favorite_48
-//            )
+            if (post.video != null) {
+                relativeLayout.visibility = View.VISIBLE }
             menu.setOnClickListener { popupMenu.show() }
         }
     }

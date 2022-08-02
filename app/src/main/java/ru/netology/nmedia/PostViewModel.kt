@@ -11,6 +11,7 @@ class PostViewModel : ViewModel(), PostIteractionListener {
     val currentPost = MutableLiveData<Post?>(null)
 
     val shareEvent = SingleLiveEvent<Post>()
+    val playEvent = SingleLiveEvent<Post>()
 
     fun onSaveButtonClicked(content: String) {
         if (content.isBlank()) return
@@ -36,6 +37,10 @@ class PostViewModel : ViewModel(), PostIteractionListener {
     }
     override fun onEditClicked(post: Post) {
         currentPost.value = post
+    }
+
+    override fun onPlayVideo(post: Post) {
+        playEvent.value = post
     }
     fun onCreatNewPost(newPostContent: String) {
         if (newPostContent.isBlank()) return
