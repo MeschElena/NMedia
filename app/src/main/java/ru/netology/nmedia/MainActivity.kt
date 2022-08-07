@@ -37,7 +37,9 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.playEvent.observe(this) { post ->
             val intent = Intent().apply {
-                putExtra(Intent.ACTION_VIEW, Uri.parse(post.video))
+                action = Intent.ACTION_VIEW
+                data = Uri.parse(post.video)
+       //         putExtra(, )
             }
 
             val videoIntent = Intent.createChooser(intent, "Open with")

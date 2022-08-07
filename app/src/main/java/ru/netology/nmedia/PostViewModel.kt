@@ -1,15 +1,18 @@
 package ru.netology.nmedia
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class PostViewModel : ViewModel(), PostIteractionListener {
+class PostViewModel(
+    application: Application
+) : AndroidViewModel(application), PostIteractionListener {
 
-    private val repository: PostRepository = PostRepositoryInMemoryImpl()
+    private val repository: PostRepository = FilePostRepository(application)
     val data get() = repository.data
 
     val currentPost = MutableLiveData<Post?>(null)
-
     val shareEvent = SingleLiveEvent<Post>()
     val playEvent = SingleLiveEvent<Post>()
 
@@ -50,7 +53,8 @@ class PostViewModel : ViewModel(), PostIteractionListener {
             id = PostRepository.NEW_POST_ID,
             author = "Me",
             content = newPostContent,
-            published =  "Today"
+            published =  "Today",
+            video = null
         )
         repository.save(post)
         currentPost.value = null
