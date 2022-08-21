@@ -6,4 +6,5 @@ interface PostIteractionListener {
     fun onShareClicked(post: Post)
     fun onEditClicked(post: Post)
     fun onPlayVideo(post: Post)
+    fun onPostClicked(post: Post)
 }

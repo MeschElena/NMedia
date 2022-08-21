@@ -37,6 +37,7 @@ class FilePostRepository(
             ).bufferedWriter().use {
                 it.write(gson.toJson(value))
             }
+            data.value = value
         }
     override val data: MutableLiveData<List<Post>>
 
@@ -56,46 +57,36 @@ class FilePostRepository(
     override fun getAll(): LiveData<List<Post>> = data
 
     override fun like(postId: Long) {
-        data.value = posts.map {post ->
+        posts = posts.map {post ->
             if (post.id == postId) post.copy(likedByMe = !post.likedByMe, countLike = post.countLike + if (post.likedByMe) -1 else 1)
             else post
         }
-        sync()
     }
 
     override fun share(postId: Long) {
-        data.value = posts.map {post -> post.copy(countShare = post.countShare + 1)}
-        sync()
+        posts = posts.map {post ->
+           if (post.id == postId)  post.copy(countShare = post.countShare + 1)
+        else post}
     }
 
     override fun delete(postId: Long) {
-        data.value = posts.filter {it.id != postId}
-        sync()
+        posts = posts.filter {it.id != postId}
     }
 
     override fun save(post: Post) {
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
-        sync()
     }
 
     private fun update(post: Post) {
-        data.value = posts.map {
+        posts = posts.map {
             if (it.id == post.id) post else it
         }
-        sync()
     }
 
     private fun insert(post: Post) {
-        data.value = listOf(
+        posts = listOf(
             post.copy(id = ++nextId)
         ) + posts
-        sync()
-    }
-
-    private fun sync() {
-        application.openFileOutput(FILE_NAME, Context.MODE_PRIVATE).bufferedWriter().use {
-            it.write(gson.toJson(posts))
-        }
     }
 
     private companion object {

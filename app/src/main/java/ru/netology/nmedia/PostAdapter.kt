@@ -25,7 +25,7 @@ internal class PostsAdapter(
 
     class ViewHolder(
         private val binding: PostListItemBinding,
-        listener: PostIteractionListener,
+        val listener: PostIteractionListener,
     ) : RecyclerView.ViewHolder(binding.root) {
 
     private lateinit var post: Post
@@ -59,10 +59,24 @@ internal class PostsAdapter(
         binding.play.setOnClickListener {
             listener.onPlayVideo(post)
         }
+
         binding.video.setOnClickListener {
             listener.onPlayVideo(post)
         }
+        binding.content.setOnClickListener{
+            listener.onPostClicked(post)
+        }
+        binding.author.setOnClickListener{
+            listener.onPostClicked(post)
+        }
+        binding.published.setOnClickListener{
+            listener.onPostClicked(post)
+        }
+        binding.avatar.setOnClickListener{
+            listener.onPostClicked(post)
+        }
     }
+
     fun bind(post: Post) {
         this.post = post
         with(binding) {
