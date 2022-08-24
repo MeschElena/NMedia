@@ -87,7 +87,7 @@ internal class PostsAdapter(
             like.isChecked = post.likedByMe
             share.text = countToString(post.countShare)
             visibilityText.text = countToString(post.countVisibility)
-            if (post.video != null) {
+            if (post.video != null && post.video != "") {
                 relativeLayout.visibility = View.VISIBLE }
             menu.setOnClickListener { popupMenu.show() }
         }

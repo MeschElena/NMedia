@@ -9,7 +9,11 @@ class PostViewModel(
     application: Application
 ) : AndroidViewModel(application), PostIteractionListener {
 
-    private val repository: PostRepository = FilePostRepository(application)
+    private val repository: PostRepository = SQLiteRepository(
+        dao = AppDb.getInstance(
+            context = application
+        ).postDao
+    )
     val data get() = repository.data
 
     val currentPost = MutableLiveData<Post?>(null)
