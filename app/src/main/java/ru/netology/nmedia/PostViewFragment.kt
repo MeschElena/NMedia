@@ -54,7 +54,6 @@ class PostViewFragment: Fragment() {
         }
     }.root
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

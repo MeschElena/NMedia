@@ -14,7 +14,9 @@ import ru.netology.nmedia.databinding.FragmentFeedBinding
 
 
 class FeedFragment : Fragment() {
-    private val viewModel by viewModels<PostViewModel>()
+    private val viewModel: PostViewModel by viewModels(
+        ownerProducer = ::requireParentFragment
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +43,14 @@ class FeedFragment : Fragment() {
             startActivity(videoIntent)
         }
 
-        setFragmentResultListener(
-            requestKey = NewPostFragment.REQUEST_KEY
-        ) {requestKey, bundle ->
-            if (requestKey != NewPostFragment.REQUEST_KEY) return@setFragmentResultListener
-            val newPostContent = bundle.getString(NewPostFragment.RESULT_KEY) ?: return@setFragmentResultListener
-            viewModel.onSaveButtonClicked(newPostContent)
-
-        }
+//        setFragmentResultListener(
+//            requestKey = NewPostFragment.REQUEST_KEY
+//        ) {requestKey, bundle ->
+//            if (requestKey != NewPostFragment.REQUEST_KEY) return@setFragmentResultListener
+//            val newPostContent = bundle.getString(NewPostFragment.RESULT_KEY) ?: return@setFragmentResultListener
+//            viewModel.onSaveButtonClicked(newPostContent)
+//
+//        }
 
         viewModel.navigateToPostContentScreenEven.observe(this){initialContent ->
             val direction = FeedFragmentDirections.actionFeedFragmentToNewPostFragment(initialContent)
@@ -63,6 +65,16 @@ class FeedFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        setFragmentResultListener(
+            requestKey = NewPostFragment.REQUEST_KEY
+        ) {requestKey, bundle ->
+            if (requestKey != NewPostFragment.REQUEST_KEY) return@setFragmentResultListener
+            val newPostContent = bundle.getString(NewPostFragment.RESULT_KEY) ?: return@setFragmentResultListener
+            viewModel.onSaveButtonClicked(newPostContent)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

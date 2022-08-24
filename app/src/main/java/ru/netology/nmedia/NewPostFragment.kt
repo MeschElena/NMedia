@@ -41,7 +41,7 @@ class NewPostFragment : Fragment() {
             resultBundle.putString(RESULT_KEY, text.toString())
             setFragmentResult(REQUEST_KEY,resultBundle)
         }
-        findNavController().popBackStack()
+        findNavController().navigateUp()//popBackStack()
     }
 
 
